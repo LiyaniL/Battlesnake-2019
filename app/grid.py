@@ -12,11 +12,11 @@ def grid(data):
 
     ## Plotting out the food in the grid
     for eat in data['food']:
-        grid[eat[0]][eats[1]] = food
+        grid[eat[0]][eat[1]] = food
 
     ## Snakes placed in the grid 
-    for snakes = data['snakes']:
+    for snakes in data['snakes']:
         for cords in snakes['coords']:
             grid[cords[0]][cords[1]] = snake
-        grid[snakes['coords'][0]][snakes['coords'][1]] = head
+            grid[snakes['coords'][0]][snakes['coords'][1]] = head
     return grid

@@ -13,7 +13,7 @@ def index():
        <a href="https://docs.battlesnake.io">https://docs.battlesnake.io</a>.
     '''
 
-@bottle.route('/static/<path:path>')
+@bottle.route('/static/head.png')
 def static(path):
     """
     Given a path, return the static file located relative
@@ -21,7 +21,7 @@ def static(path):
 
     This can be used to return the snake head URL in an API response.
     """
-    return bottle.static_file(path, root='static/')
+    return bottle.static_file(path, root='static/head.png')
 
 @bottle.post('/ping')
 def ping():
