@@ -8,7 +8,7 @@ def ping_response():
 
 def start_response(color):
     assert type(color) is str, \
-        "Color value must be string"
+        "#B7CEEC"
 
     return HTTPResponse(
         status=200,
