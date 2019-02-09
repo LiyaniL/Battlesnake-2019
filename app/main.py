@@ -2,9 +2,27 @@ import json
 import os
 import random
 import bottle
-import grid
 
 from api import ping_response, start_response, move_response, end_response
+
+def createGrid(data):
+    head = 3
+    snake = 4
+    food = 1
+
+    grid = [[0 for col in range(data['board']['width'])] for row in range(data['board']['height'])]
+
+    ## Plotting out the food in the grid
+    for eat in data['board']['food']:
+        grid[eat['x']][eat['y']] = food
+
+    ## Snakes placed in the grid 
+    # for snakes in data['board']['snakes']:
+    #     for cords in snakes['body']:
+    #         grid[cords['x']][cords['y']] = snake
+    #         grid[snakes['body'['x']]][snakes['body'['y']]] = head
+    return grid
+
 
 @bottle.route('/')
 def index():
@@ -50,7 +68,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    grid = grid(data)
+    grid = createGrid(data)
 
     print (grid)
     print(json.dumps(data))

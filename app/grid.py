@@ -7,12 +7,16 @@ head = 3
 snake = 4
 
 ## Create a grid from the data given 
-def grid(data):
+def createGrid(data):
+    head = 3
+    snake = 4
+    food = 1
+
     grid = [[0 for col in range(data['width'])] for row in range(data['height'])]
 
     ## Plotting out the food in the grid
     for eat in data['food']:
-        grid[eat[0]][eat[1]] = food
+        grid[eat['x']][eat['y']] = food
 
     ## Snakes placed in the grid 
     for snakes in data['snakes']:
