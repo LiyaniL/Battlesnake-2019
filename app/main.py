@@ -17,10 +17,10 @@ def createGrid(data):
         grid[eat['x']][eat['y']] = food
 
     ## Snakes placed in the grid 
-    # for snakes in data['board']['snakes']:
-    #     for cords in snakes['body']:
-    #         grid[cords['x']][cords['y']] = snake
-    #         grid[snakes['body'['x']]][snakes['body'['y']]] = head
+    for snakes in data['board']['snakes']:
+         for cords in snakes['body']:
+             grid[cords['x']][cords['y']] = snake
+            #  grid[snakes['body']['x']][snakes[['body']['y']]] = head
     return grid
 
 
