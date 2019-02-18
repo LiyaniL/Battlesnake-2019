@@ -1,26 +1,32 @@
-#  Grid Creation for battlesnake
+import snakeinfo as si
 
-food = 1
-
-## snakes start out with a default body size of 4 
-head = 3
-snake = 4
-
-## Create a grid from the data given 
+# Create the grid to track the python
 def createGrid(data):
+    board = si.boardDimension(data['board']['height'], data['board']['width'])
+    #board.board()
     head = 3
     snake = 4
     food = 1
+    width = (board.width)
+    #print(width)
+    height = (board.height)
+    #print(height)
 
-    grid = [[0 for col in range(data['width'])] for row in range(data['height'])]
-
+    grid = [[0 for col in range(width)] for row in range(height)]
     ## Plotting out the food in the grid
-    for eat in data['food']:
-        grid[eat['x']][eat['y']] = food
+    for eat in data['board']['food']:
+        grid[eat['y']][eat['x']] = food
 
     ## Snakes placed in the grid 
-    for snakes in data['snakes']:
-        for cords in snakes['coords']:
-            grid[cords[0]][cords[1]] = snake
-            grid[snakes['coords'][0]][snakes['coords'][1]] = head
+    for snakes in data['board']['snakes']:
+        x = snakes['body'][0]['x']
+        y = snakes['body'][0]['y']
+        grid[y][x] = head    
+         
+        for cords in snakes['body']:
+            grid[cords['y']][cords['x']] = snake
+            #  print("Head is at:", cords['y'])
+            #  print("Head is at: ", cords['x'])
+            # print("<======================>")
+            #  grid[snakes['body']['x']][snakes[['body']['y']]] = head
     return grid
