@@ -52,7 +52,7 @@ def move():
     data = bottle.request.json
     grid = createGrid(data)
     
-    print (grid)
+    # print (grid)
     # print(json.dumps(data, indent=4, sort_keys=True))
 
     directions = ['up', 'down', 'left', 'right']
@@ -70,7 +70,7 @@ def end():
     TODO: If your snake AI was stateful,
         clean up any stateful objects here.
     """
-    print(json.dumps(data))
+    # print(json.dumps(data))
 
     return end_response()
 
