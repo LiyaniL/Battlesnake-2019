@@ -32,8 +32,8 @@ def createGrid(data):
     allSnakes = board.snakes
     enemyHealth = board.health
 
-    # for snakes in allSnakes:
-    #     board.printHealth(snakes['name'], snakes['health'])
+    for snakes in allSnakes:
+        board.printHealth(snakes['name'], snakes['health'])
 
     #Our snake
     sid = ourSnake.sid
