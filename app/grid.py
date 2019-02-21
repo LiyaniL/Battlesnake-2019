@@ -2,7 +2,7 @@ import snakeinfo as si
 
 # Create the grid to track the python
 def createGrid(data):
-    board = si.board(
+    board = si.board (
         data['board']['height'], 
         data['board']['width'],
         data['board']['food'],
@@ -10,7 +10,7 @@ def createGrid(data):
         data['board']['snakes'][0]
     )
 
-    ourSnake = si.ourSnake(
+    ourSnake = si.ourSnake (
         data['you']['id'],
         data['you']['name'],
         data['you']['health'],
@@ -45,7 +45,7 @@ def createGrid(data):
     
 
 
-
+    # Grid creation 
     grid = [[0 for col in range(width)] for row in range(height)]
     # Plotting out the food in the grid
     for eat in foodPos:
@@ -62,6 +62,7 @@ def createGrid(data):
 
     # Our snakes head and body positions
     grid[ourY][ourX] = head
+    ourSnake.printHead()
     for cords in ourBody:
         grid[cords['y']][cords['x']] = snake
 

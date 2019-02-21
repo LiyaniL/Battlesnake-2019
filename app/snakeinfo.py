@@ -20,15 +20,6 @@ class board:
     def printHealth(self, name, health):
         print("Health of \"", name, "\" is: ", health)
 
-# This class deals with the heads of all snakes in the board
-class sHead:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def printHead(self):
-        print("Head is at: ", self.x, " : ", self.y)
-
 
 # This class deals with our snakes id, name, health, and body position
 class ourSnake:
