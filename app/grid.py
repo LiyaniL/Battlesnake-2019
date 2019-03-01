@@ -21,8 +21,8 @@ def createGrid(data):
 
     # Grid Position variable declaration
     head = 3
-    snake = 4
-    food = 1
+    snake = 0
+    food = 2
 
     # Class variable declarations
     # Board
@@ -43,27 +43,26 @@ def createGrid(data):
     ourX = ourSnake.x
     ourY = ourSnake.y
     
-
-
     # Grid creation 
-    grid = [[0 for col in range(width)] for row in range(height)]
+    grid = [[1 for col in range(width)] for row in range(height)]
     # Plotting out the food in the grid
     for eat in foodPos:
         grid[eat['y']][eat['x']] = food
 
-    # Snakes placed in the grid 
-    for snakes in allSnakes:
-        x = snakes['body'][0]['x']
-        y = snakes['body'][0]['y']
-        grid[y][x] = head    
-
+    # Snakes placed in the grid     
     for cords in snakes['body']:
         grid[cords['y']][cords['x']] = snake
 
+    for snakes in allSnakes:
+        x = snakes['body'][0]['x']
+        y = snakes['body'][0]['y']
+        grid[y][x] = head
+
     # Our snakes head and body positions
-    grid[ourY][ourX] = head
-    ourSnake.printHead()
     for cords in ourBody:
         grid[cords['y']][cords['x']] = snake
+
+    grid[ourY][ourX] = head
+    ourSnake.printHead()
 
     return grid

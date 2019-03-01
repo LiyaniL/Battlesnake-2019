@@ -3,7 +3,7 @@ import os
 import random
 import bottle
 from grid import createGrid
-
+from move import moveSnake
 from api import ping_response, start_response, move_response, end_response
 
 @bottle.route('/')
@@ -51,7 +51,7 @@ def start():
 def move():
     data = bottle.request.json
     grid = createGrid(data)
-    
+    moveSnake(grid, data)
     # print (grid)
     # print(json.dumps(data, indent=4, sort_keys=True))
 

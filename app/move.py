@@ -1,8 +1,12 @@
 # This will deal with the movement of the snake
 import snakeinfo as si
+from pathfinding.core.diagonal_movement import DiagonalMovement
+from pathfinding.core.grid import Grid
+from pathfinding.finder.a_star import AStarFinder
 
-def moveSnake(data, direction):
-    dirt = ['up', 'down', 'left', 'right']
+
+def moveSnake(grid, data):
+    grid = Grid(matrix=grid)
 
     # Board class declaration
     board = si.board (
@@ -35,3 +39,12 @@ def moveSnake(data, direction):
     ourBody = ourSnake.body
     ourX = ourSnake.x
     ourY = ourSnake.y
+
+    start = grid.node(ourX, ourY)
+    end = grid.node(0, 0)
+
+    finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
+    path, runs = finder.find_path(start, end, grid)
+
+    print ('operations: ', runs, 'path length: ', len(path))
+    print(grid.grid_str(path=path, start=start, end=end))
