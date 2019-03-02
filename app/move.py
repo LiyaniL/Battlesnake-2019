@@ -10,11 +10,18 @@ directions = ['up', 'down', 'left', 'right']
 #     tailX = 
 #     if health == 100:
 
-def findFood(board):
+def findFood(board, x, y):
     foodToEat = (board.food[0]['x'],board.food[0]['y'])
-    # for food in board.food.length:
-    #     if(((board.food[food]['x'] - ourX) + (board.food[food]['y'] - ourY)) < ((foodToEat['x'] + ourX) + (foodToEat['y'] + ourY))):
-    #         foodToEat = (board.food[food]['x'], board.food[food]['y'])
+    # print("food[x] = " + str(board.food[0]['x']))
+    # print("x = " + str(x))
+    # print("food[y] = " + str(board.food[0]['y']))
+    # print("y = " + str(y))
+    # print("plus x is " + str(board.food[0]['x'] + x))
+    # print("plus y is " + str(board.food[0]['y'] + y))
+    for food in board.food:
+        if((abs(food['x'] - x) + abs(food['y'] - y)) < abs((foodToEat[0] - x) + abs(foodToEat[1] - y))):
+            foodToEat = (food['x'], food['y'])
+        # print(str(food['x']) + "iterating")
     return foodToEat
     
 
@@ -62,7 +69,7 @@ def generatePath(grid, data):
 
 
     if(state == 1):
-        foodToEat = findFood(board)
+        foodToEat = findFood(board, ourX, ourY)
         end = grid.node(foodToEat[0], foodToEat[1])
     else:
         end = grid.node(board.food[0]['x'], board.food[0]['y'])
