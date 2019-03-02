@@ -51,13 +51,13 @@ def start():
 def move():
     data = bottle.request.json
     grid = createGrid(data)
-    generatePath(grid, data)
+    move = generatePath(grid, data)
     # print (grid)
     # print(json.dumps(data, indent=4, sort_keys=True))
 
     directions = ['up', 'down', 'left', 'right']
 
-    direction = random.choice(directions)
+    direction = directions[move]
 
     return move_response(direction)
 
