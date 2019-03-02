@@ -1,6 +1,5 @@
 # This will deal with the movement of the snake
 import snakeinfo as si
-import getFood
 from pathfinding.core.diagonal_movement import DiagonalMovement
 from pathfinding.core.grid import Grid
 from pathfinding.finder.a_star import AStarFinder
@@ -11,6 +10,8 @@ def findFood(board):
     
 
 def generatePath(grid, data):
+
+
     grid = Grid(matrix=grid)
     
         
@@ -56,6 +57,7 @@ def generatePath(grid, data):
     #end = grid.node(board.food[0]['x'],board.food[0]['y'])
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
 
+    finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
     path, runs = finder.find_path(start, end, grid)
     next_path = path[1]
     print(start)
