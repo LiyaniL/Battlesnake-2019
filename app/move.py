@@ -10,8 +10,12 @@ directions = ['up', 'down', 'left', 'right']
 #     tailX = 
 #     if health == 100:
 
-# def findFood(board):
-#     return (board.food[0]['x'],board.food[0]['y'])
+def findFood(board):
+    foodToEat = (board.food[0]['x'],board.food[0]['y'])
+    # for food in board.food.length:
+    #     if(((board.food[food]['x'] - ourX) + (board.food[food]['y'] - ourY)) < ((foodToEat['x'] + ourX) + (foodToEat['y'] + ourY))):
+    #         foodToEat = (board.food[food]['x'], board.food[food]['y'])
+    return foodToEat
     
 
 def generatePath(grid, data):
@@ -57,12 +61,12 @@ def generatePath(grid, data):
     start = grid.node(ourX, ourY)
 
 
-    # if(state == 1):
-    #     end = grid.node(findFood(board))
-
-
-
-    end = grid.node(board.food[0]['x'],board.food[0]['y'])
+    if(state == 1):
+        foodToEat = findFood(board)
+        end = grid.node(foodToEat[0], foodToEat[1])
+    else:
+        end = grid.node(board.food[0]['x'], board.food[0]['y'])
+    
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
 
     path, runs = finder.find_path(start, end, grid)
