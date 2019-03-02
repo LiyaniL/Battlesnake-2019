@@ -16,7 +16,9 @@ def createGrid(data):
         data['you']['health'],
         data['you']['body'],
         data['you']['body'][0]['x'],
-        data['you']['body'][0]['y']
+        data['you']['body'][0]['y'],
+        data['you']['body'][-1]['x'],
+        data['you']['body'][-1]['y']
     )
 
     # Grid Position variable declaration
@@ -42,6 +44,7 @@ def createGrid(data):
     ourBody = ourSnake.body
     ourX = ourSnake.x
     ourY = ourSnake.y
+    
     
     # Grid creation 
     grid = [[1 for col in range(width)] for row in range(height)]
