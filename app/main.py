@@ -51,7 +51,7 @@ def start():
 def move():
     data = bottle.request.json
     grid = createGrid(data)
-    # generatePath(grid, data)
+    generatePath(grid, data)
     # print (grid)
     # print(json.dumps(data, indent=4, sort_keys=True))
 
@@ -59,7 +59,7 @@ def move():
 
     direction = generatePath(grid, data)
 
-    return move_response(direction)
+    return move_response(directions[direction])
 
 
 @bottle.post('/end')

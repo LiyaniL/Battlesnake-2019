@@ -23,13 +23,16 @@ class board:
 
 # This class deals with our snakes id, name, health, and body position
 class ourSnake:
-    def __init__(self, sid, name, health, body, x, y):
+    def __init__(self, sid, name, health, body, x, y, tailX, tailY):
         self.sid = sid
         self.name = name
         self.health = health
         self.body = body
         self.x = x
         self.y = y
-    
+        self.tailX = tailX
+        self.tailY = tailY
+
+
     def printHead(self):
         print("Head is at: ", self.x, " : ", self.y)
