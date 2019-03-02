@@ -6,9 +6,13 @@ from pathfinding.core.grid import Grid
 from pathfinding.finder.a_star import AStarFinder
 directions = ['up', 'down', 'left', 'right']
 
+def findFood(board):
+    return (board.food[0]['x'],board.food[0]['y'])
+    
+
 def generatePath(grid, data):
     grid = Grid(matrix=grid)
-
+    
         
     # Board class declaration
     board = si.board (
@@ -18,7 +22,7 @@ def generatePath(grid, data):
         data['board']['snakes'],
         data['board']['snakes'][0]
     )
-
+    
     width = board.width
     height = board.height
     foodPos = board.food
@@ -41,9 +45,15 @@ def generatePath(grid, data):
     ourBody = ourSnake.body
     ourX = ourSnake.x
     ourY = ourSnake.y
-    print("food local = " + str(board.food[0]), + str(board.food[1]))
+    state = 1
     start = grid.node(ourX, ourY)
-    end = grid.node(0, 0)
+
+
+    if(state == 1):
+        end = grid.node(getFood(board))
+
+
+    #end = grid.node(board.food[0]['x'],board.food[0]['y'])
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
 
     path, runs = finder.find_path(start, end, grid)
@@ -52,6 +62,10 @@ def generatePath(grid, data):
     # print(next_path)
     print(next_path[0], next_path[1])
     print(start.x + 1)
+
+
+    
+
     if (next_path[0] == start.x + 1):
         print ("Right?")
         return 3
