@@ -42,7 +42,7 @@ def generatePath(grid, data):
     ourBody = ourSnake.body
     ourX = ourSnake.x
     ourY = ourSnake.y
-
+    print("food local = " + str(board.food[0]), + str(board.food[1]))
     start = grid.node(ourX, ourY)
     end = grid.node(0, 0)
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
@@ -51,3 +51,5 @@ def generatePath(grid, data):
     print(path[1])
     print ('operations: ', runs, 'path length: ', len(path))
     print(grid.grid_str(path=path, start=start, end=end))
+
+    
