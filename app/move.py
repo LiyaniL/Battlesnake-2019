@@ -9,7 +9,6 @@ directions = ['up', 'down', 'left', 'right']
 def generatePath(grid, data):
     grid = Grid(matrix=grid)
 
-    def getFood():
         
     # Board class declaration
     board = si.board (
@@ -48,13 +47,6 @@ def generatePath(grid, data):
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
 
     path, runs = finder.find_path(start, end, grid)
-<<<<<<< HEAD
-    print(path[1])
-    print ('operations: ', runs, 'path length: ', len(path))
-    print(grid.grid_str(path=path, start=start, end=end))
-
-    
-=======
     next_path = path[1]
     print(start)
     # print(next_path)
@@ -78,4 +70,3 @@ def generatePath(grid, data):
     # print ('operations: ', runs, 'path length: ', len(path))
     # print(grid.grid_str(path=path, start=start, end=end))
 
->>>>>>> 7fe93545f2c318ae015c54da66c00d40d46cac4c
