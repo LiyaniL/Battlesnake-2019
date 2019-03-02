@@ -44,6 +44,28 @@ def generatePath(grid, data):
 
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
     path, runs = finder.find_path(start, end, grid)
-    print(path[1])
-    print ('operations: ', runs, 'path length: ', len(path))
-    print(grid.grid_str(path=path, start=start, end=end))
+    next_path = path
+    print(start)
+    print(next_path)
+    print(grid.node(ourX, ourY))
+    if (next_path == grid.node(ourX + 1, ourY)):
+        print ("Right?")
+        return 3
+    
+    elif (next_path == grid.node(ourX - 1, ourY)):
+        print ("Left?")
+        return 2
+
+    if (next_path == grid.node(ourX, ourY + 1)):
+        print ("Down?")
+        return 1
+
+    if (next_path == grid.node(ourX, ourY - 1)):
+        print ("Up?")
+        return 0
+
+    else:
+        return 1
+    # print ('operations: ', runs, 'path length: ', len(path))
+    # print(grid.grid_str(path=path, start=start, end=end))
+
