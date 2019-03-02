@@ -5,9 +5,11 @@ from pathfinding.core.grid import Grid
 from pathfinding.finder.a_star import AStarFinder
 directions = ['up', 'down', 'left', 'right']
 
-# def followTail(health, ourSnake):
-#     tailX = 
-#     if health == 100:
+def followTail(health, x, y):
+    tailX = x
+    tailY = y
+    if health == 100:
+        return (tailX, tailY)
 
 # def findFood(board):
 #     return (board.food[0]['x'],board.food[0]['y'])
@@ -60,11 +62,16 @@ def generatePath(grid, data):
 
     # if(state == 1):
     #     end = grid.node(findFood(board))
+    tailPoint = followTail(ourHealth, tailX, tailY)
+    
+    end = grid.node(0, 0)
+    print(ourHealth)
+    if ourHealth != 100:
+        print("checking health") 
+        end = grid.node(board.food[0]['x'],board.food[0]['y'])
+    # elif ourHealth == 100:
+    # end = grid.node(tailPoint[0], tailPoint[1])
 
-
-
-    end = grid.node(board.food[0]['x'],board.food[0]['y'])
-    finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
 
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
     path, runs = finder.find_path(start, end, grid)
@@ -90,5 +97,5 @@ def generatePath(grid, data):
         print ("Down")
         return 0
     # print ('operations: ', runs, 'path length: ', len(path))
-    # print(grid.grid_str(path=path, start=start, end=end))
+    print(grid.grid_str(path=path, start=start, end=end))
 
