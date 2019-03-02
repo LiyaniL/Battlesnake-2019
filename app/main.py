@@ -51,7 +51,7 @@ def start():
 def move():
     data = bottle.request.json
     grid = createGrid(data)
-    moveSnake(grid, data)
+    generatePath(grid, data)
     # print (grid)
     # print(json.dumps(data, indent=4, sort_keys=True))
 
