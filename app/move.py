@@ -56,7 +56,7 @@ def generatePath(grid, data):
         data['you']['body'][-1]['x'],
         data['you']['body'][-1]['y']
     )
-
+    # print(data)
     sid = ourSnake.sid
     name = ourSnake.name
     ourHealth = ourSnake.health
@@ -65,19 +65,16 @@ def generatePath(grid, data):
     ourY = ourSnake.y
     tailX = ourSnake.tailX
     tailY = ourSnake.tailY
-    state = 1
     start = grid.node(ourX, ourY)
+    state = 1
 
-
-    # if(state == 1):
-    #     end = grid.node(findFood(board))
     tailPoint = followTail(tailX, tailY)
     
     end = grid.node(0, 0)
-    print(ourHealth)
-    print(tailPoint[0], tailPoint[1])
-    if ourHealth >= 80:
-        state = 2
+    # print(ourHealth)
+    # print(tailPoint[0], tailPoint[1])
+    # if ourHealth >= 80:
+        # state = 2
 
     # elif ourHealth == 100:
     # end = grid.node(tailPoint[0], tailPoint[1])
@@ -97,10 +94,11 @@ def generatePath(grid, data):
 
     path, runs = finder.find_path(start, end, grid)
     next_path = path[1]
-    print(start)
+    # print(start)
     # print(next_path)
-    print(next_path[0], next_path[1])
-    print(start.x + 1)
+    # print(next_path[0], next_path[1])
+    # print(start.x + 1)
+    # print(grid.grid_str(path=path, start=start, end=end))
 
     if (next_path[0] == start.x + 1):
         print ("Right?")
@@ -118,5 +116,5 @@ def generatePath(grid, data):
         print ("Down")
         return 0
     # print ('operations: ', runs, 'path length: ', len(path))
-    print(grid.grid_str(path=path, start=start, end=end))
+    # print(grid.grid_str(path=path, start=start, end=end))
 
