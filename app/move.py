@@ -6,11 +6,10 @@ from pathfinding.core.grid import Grid
 from pathfinding.finder.a_star import AStarFinder
 directions = ['up', 'down', 'left', 'right']
 
-def followTail(health, x, y):
+def followTail(x, y):
     tailX = x
     tailY = y
-    if health == 100:
-        return (tailX, tailY)
+    return (tailX, tailY)
 
 def findFood(board):
     foodToEat = (board.food[0]['x'],board.food[0]['y'])
@@ -65,13 +64,14 @@ def generatePath(grid, data):
 
     # if(state == 1):
     #     end = grid.node(findFood(board))
-    tailPoint = followTail(ourHealth, tailX, tailY)
+    tailPoint = followTail(tailX, tailY)
     
     end = grid.node(0, 0)
     print(ourHealth)
-    if ourHealth != 100:
-        print("checking health") 
-        end = grid.node(board.food[0]['x'],board.food[0]['y'])
+    print(tailPoint[0], tailPoint[1])
+    if ourHealth >= 80:
+        state = 2
+
     # elif ourHealth == 100:
     # end = grid.node(tailPoint[0], tailPoint[1])
 
@@ -80,8 +80,11 @@ def generatePath(grid, data):
     if(state == 1):
         foodToEat = findFood(board)
         end = grid.node(foodToEat[0], foodToEat[1])
-    else:
-        end = grid.node(board.food[0]['x'], board.food[0]['y'])
+
+    elif(state == 2):
+        end = grid.node(tailPoint[0], tailPoint[1])
+    # else:
+    #     end = grid.node(board.food[0]['x'], board.food[0]['y'])
     
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
 
