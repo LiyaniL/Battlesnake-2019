@@ -56,6 +56,10 @@ def generatePath(grid, data):
         data['you']['body'][-1]['x'],
         data['you']['body'][-1]['y']
     )
+
+    # for snake in board.snakes:
+    #     print(snake)
+    # print(board.food)
     # print(data)
     sid = ourSnake.sid
     name = ourSnake.name
