@@ -13,16 +13,9 @@ def followTail(x, y):
 
 def findFood(board, x, y):
     foodToEat = (board.food[0]['x'],board.food[0]['y'])
-    # print("food[x] = " + str(board.food[0]['x']))
-    # print("x = " + str(x))
-    # print("food[y] = " + str(board.food[0]['y']))
-    # print("y = " + str(y))
-    # print("plus x is " + str(board.food[0]['x'] + x))
-    # print("plus y is " + str(board.food[0]['y'] + y))
     for food in board.food:
         if((abs(food['x'] - x) + abs(food['y'] - y)) < abs((foodToEat[0] - x) + abs(foodToEat[1] - y))):
             foodToEat = (food['x'], food['y'])
-        # print(str(food['x']) + "iterating")
     return foodToEat
     
 
@@ -70,23 +63,15 @@ def generatePath(grid, data):
     tailX = ourSnake.tailX
     tailY = ourSnake.tailY
     start = grid.node(ourX, ourY)
-    if(len(board.food[0]) == 0):
+    if(len(board.food) == 0):
         state = 3
     else:
         state = 1
 
     tailPoint = followTail(tailX, tailY)
-    
- 
-    # print(ourHealth)
-    # print(tailPoint[0], tailPoint[1])
-    # if ourHealth >= 80:
-        # state = 2
 
-    # elif ourHealth == 100:
-    # end = grid.node(tailPoint[0], tailPoint[1])
-
-
+   
+    # print(tailPoint[1])
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
     if(state == 1):
         print("state 1")
@@ -107,8 +92,8 @@ def generatePath(grid, data):
     # print(next_path)
     # print(next_path[0], next_path[1])
     # print(start.x + 1)
-    # print ('operations: ', runs, 'path length: ', len(path))
-    # print(grid.grid_str(path=path, start=start, end=end))
+    print ('operations: ', runs, 'path length: ', len(path))
+    print(grid.grid_str(path=path, start=start, end=end))
 
     if (next_path[0] == start.x + 1):
         # print ("Right?")
