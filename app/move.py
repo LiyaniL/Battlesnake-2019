@@ -89,14 +89,15 @@ def generatePath(grid, data):
 
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
     if(state == 1):
+        print("state 1")
         foodToEat = findFood(board, ourX, ourY)
         end = grid.node(foodToEat[0], foodToEat[1])
     elif(state == 2):
+        print("state 2")
         end = grid.node(tailPoint[0], tailPoint[1])
     elif(state == 3):
+        print("state 3")
         end = grid.node(0, 0)
-    # else:
-    #     end = grid.node(board.food[0]['x'], board.food[0]['y'])
     
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
 
@@ -110,18 +111,18 @@ def generatePath(grid, data):
     # print(grid.grid_str(path=path, start=start, end=end))
 
     if (next_path[0] == start.x + 1):
-        print ("Right?")
+        # print ("Right?")
         return 3
 
     elif (next_path[0] == start.x - 1):
-        print ("Left")
+        # print ("Left")
         return 2
     
     elif (next_path[1] == start.y + 1):
-        print ("Up")
+        # print ("Up")
         return 1
 
     else:
-        print ("Down")
+        # print ("Down")
         return 0
 
