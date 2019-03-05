@@ -9,8 +9,8 @@ from api import ping_response, start_response, move_response, end_response
 @bottle.route('/')
 def index():
     return '''
-    Battlesnake documentation can be found at
-       <a href="https://docs.battlesnake.io">https://docs.battlesnake.io</a>.
+    In case you were wondering:
+       <a href="https://en.wikipedia.org/wiki/Habushu">Habushu</a>.
     '''
 
 @bottle.route('/static/head.png')
@@ -51,7 +51,6 @@ def start():
 def move():
     data = bottle.request.json
     grid = createGrid(data)
-    generatePath(grid, data)
     # print (grid)
     # print(json.dumps(data, indent=4, sort_keys=True))
 
