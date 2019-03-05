@@ -26,6 +26,14 @@ def findFood(board, x, y):
     return foodToEat
     
 
+def is_empty(any_structure):
+    if any_structure:
+        print('Structure is not empty.')
+        return False
+    else:
+        print('Structure is empty.')
+        return True
+
 def generatePath(grid, data):
     grid = Grid(matrix=grid)
     
@@ -74,7 +82,7 @@ def generatePath(grid, data):
     if(len(board.food) == 0):
         state = 3
     print(ourBody)
-    if (len(ourBody) >3 and (ourHealth >= 50)):
+    if (len(ourBody) > 10 and (ourHealth >= 50)):
         print("In Second State")
         state = 2
     else:
@@ -89,7 +97,7 @@ def generatePath(grid, data):
     #     state = 2
     foodToEat = findFood(board, ourX, ourY)
     end = grid.node(foodToEat[0], foodToEat[1])
-    finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
+    finder = AStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
 
     if(state == 1):
         print("state 1")
@@ -106,12 +114,17 @@ def generatePath(grid, data):
         print("state 3")
         end = grid.node(tailPoint[0], tailPoint[1])
     
-    finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
+    finder = AStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
 
     path, runs = finder.find_path(start, end, grid)
     print(path)
-    next_path = path[1]
-    
+    next_path = path[1]          
+    if (is_empty(next_path)):
+        print("Invalid Move.... Remapping")
+        end = grid.node(tailPoint[0], tailPoint[1])
+        finder = AStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
+        path, runs = finder.find_path(start, end, grid)
+
     # print(start)
     # print(next_path)
     # print(next_path[0], next_path[1])

@@ -22,10 +22,10 @@ def createGrid(data):
     )
 
     # Grid Position variable declaration
-    head = 3
+    head = 0
     snake = 0
-    tail = 2
-    food = 2
+    tail = 1
+    food = 4
 
     # Class variable declarations
     # Board
