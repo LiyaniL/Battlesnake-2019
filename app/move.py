@@ -82,7 +82,7 @@ def generatePath(grid, data):
     if(len(board.food) == 0):
         state = 3
     print(ourBody)
-    if (len(ourBody) > 2 and (ourHealth >= 50)):
+    if (len(ourBody) > 3 and (ourHealth >= 50)):
         print("In Second State")
         state = 2
     else:
