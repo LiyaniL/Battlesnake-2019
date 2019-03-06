@@ -65,7 +65,10 @@ def generatePath(grid, data):
     ourY = ourSnake.y
     tailX = ourSnake.tailX
     tailY = ourSnake.tailY
-    state = 1
+    if (board.food):
+        state = 1
+    else:
+        state = 2
     start = grid.node(ourX, ourY)
 
 
@@ -76,8 +79,8 @@ def generatePath(grid, data):
     end = grid.node(0, 0)
     print(ourHealth)
     print(tailPoint[0], tailPoint[1])
-    if ourHealth >= 80:
-        state = 2
+    # if ourHealth >= 80:
+    #     state = 2
 
     # elif ourHealth == 100:
     # end = grid.node(tailPoint[0], tailPoint[1])
@@ -88,35 +91,38 @@ def generatePath(grid, data):
         foodToEat = findFood(board, ourX, ourY)
         end = grid.node(foodToEat[0], foodToEat[1])
 
-    elif(state == 2):
-        end = grid.node(tailPoint[0], tailPoint[1])
-    # else:
-    #     end = grid.node(board.food[0]['x'], board.food[0]['y'])
+    # elif(state == 2):
+    #     end = grid.node(tailPoint[0], tailPoint[1])
+    else:
+        end = grid.node(board.food[0]['x'], board.food[0]['y'])
     
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
-
     path, runs = finder.find_path(start, end, grid)
-    next_path = path[1]
-    print(start)
-    # print(next_path)
-    print(next_path[0], next_path[1])
-    print(start.x + 1)
-
-    if (next_path[0] == start.x + 1):
-        print ("Right?")
-        return 3
-
-    if (next_path[0] == start.x - 1):
-        print ("Left")
-        return 2
-    
-    if (next_path[1] == start.y + 1):
-        print ("Up")
-        return 1
-
-    if (next_path[1] == start.y - 1):
-        print ("Down")
-        return 0
-    # print ('operations: ', runs, 'path length: ', len(path))
     print(grid.grid_str(path=path, start=start, end=end))
+    if (len(path) >= 2):
+        next_path = path[1]
+        print(start)
+        # print(next_path)
+        print(next_path[0], next_path[1])
+        print(start.x + 1)
+
+        if (next_path[0] == start.x + 1):
+            print ("Right?")
+            return 3
+
+        if (next_path[0] == start.x - 1):
+            print ("Left")
+            return 2
+        
+        if (next_path[1] == start.y + 1):
+            print ("Up")
+            return 1
+
+        if (next_path[1] == start.y - 1):
+            print ("Down")
+            return 0
+    
+    elif (len(path))
+    # print ('operations: ', runs, 'path length: ', len(path))
+   
 
