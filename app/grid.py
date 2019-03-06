@@ -22,9 +22,10 @@ def createGrid(data):
     )
 
     # Grid Position variable declaration
-    head = 3
+    head = 0
     snake = 0
-    food = 2
+    tail = 1
+    food = 4
 
     # Class variable declarations
     # Board
@@ -44,7 +45,8 @@ def createGrid(data):
     ourBody = ourSnake.body
     ourX = ourSnake.x
     ourY = ourSnake.y
-    
+    tailX = ourSnake.tailX
+    tailY = ourSnake.tailY
     
     # Grid creation 
     grid = [[1 for col in range(width)] for row in range(height)]
@@ -66,6 +68,7 @@ def createGrid(data):
         grid[cords['y']][cords['x']] = snake
 
     grid[ourY][ourX] = head
-    ourSnake.printHead()
+    grid[tailY][tailX] = tail
+    #ourSnake.printHead()
 
     return grid

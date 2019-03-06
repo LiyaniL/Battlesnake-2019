@@ -9,22 +9,30 @@ directions = ['up', 'down', 'left', 'right']
 def followTail(x, y):
     tailX = x
     tailY = y
-    return (tailX, tailY)
+    tailPoint = (tailX, tailY)
+    return tailPoint
+
+def checkHealth(health):
+    if health >= 80:
+        print("true")
+        return True
+
 
 def findFood(board, x, y):
     foodToEat = (board.food[0]['x'],board.food[0]['y'])
-    # print("food[x] = " + str(board.food[0]['x']))
-    # print("x = " + str(x))
-    # print("food[y] = " + str(board.food[0]['y']))
-    # print("y = " + str(y))
-    # print("plus x is " + str(board.food[0]['x'] + x))
-    # print("plus y is " + str(board.food[0]['y'] + y))
     for food in board.food:
         if((abs(food['x'] - x) + abs(food['y'] - y)) < abs((foodToEat[0] - x) + abs(foodToEat[1] - y))):
             foodToEat = (food['x'], food['y'])
-        # print(str(food['x']) + "iterating")
     return foodToEat
     
+
+def is_empty(any_structure):
+    if any_structure:
+        print('Structure is not empty.')
+        return False
+    else:
+        print('Structure is empty.')
+        return True
 
 def generatePath(grid, data):
     grid = Grid(matrix=grid)
@@ -57,6 +65,10 @@ def generatePath(grid, data):
         data['you']['body'][-1]['y']
     )
 
+    # for snake in board.snakes:
+    #     print(snake)
+    # print(board.food)
+    # print(data)
     sid = ourSnake.sid
     name = ourSnake.name
     ourHealth = ourSnake.health
@@ -65,64 +77,74 @@ def generatePath(grid, data):
     ourY = ourSnake.y
     tailX = ourSnake.tailX
     tailY = ourSnake.tailY
-    if (board.food):
-        state = 1
-    else:
-        state = 2
     start = grid.node(ourX, ourY)
 
-
-    # if(state == 1):
-    #     end = grid.node(findFood(board))
-    tailPoint = followTail(tailX, tailY)
-    
-    end = grid.node(0, 0)
-    print(ourHealth)
-    print(tailPoint[0], tailPoint[1])
-    # if ourHealth >= 80:
-    #     state = 2
-
-    # elif ourHealth == 100:
-    # end = grid.node(tailPoint[0], tailPoint[1])
-
-
-    finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
-    if(state == 1):
-        foodToEat = findFood(board, ourX, ourY)
-        end = grid.node(foodToEat[0], foodToEat[1])
-
-    # elif(state == 2):
-    #     end = grid.node(tailPoint[0], tailPoint[1])
+    if(len(board.food) == 0):
+        state = 3
+    print(ourBody)
+    if (len(ourBody) > 3 and (ourHealth >= 50)):
+        print("In Second State")
+        state = 2
     else:
-        end = grid.node(board.food[0]['x'], board.food[0]['y'])
-    
-    finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
-    path, runs = finder.find_path(start, end, grid)
-    print(grid.grid_str(path=path, start=start, end=end))
-    if (len(path) >= 2):
-        next_path = path[1]
-        print(start)
-        # print(next_path)
-        print(next_path[0], next_path[1])
-        print(start.x + 1)
+        state = 1
 
-        if (next_path[0] == start.x + 1):
-            print ("Right?")
-            return 3
-
-        if (next_path[0] == start.x - 1):
-            print ("Left")
-            return 2
-        
-        if (next_path[1] == start.y + 1):
-            print ("Up")
-            return 1
-
-        if (next_path[1] == start.y - 1):
-            print ("Down")
-            return 0
-    
-    elif (len(path))
-    # print ('operations: ', runs, 'path length: ', len(path))
+    tailPoint = followTail(tailX, tailY)
+    # foodToEat[0], foodToEat[1]
    
+    # print(tailPoint[1])
+    # print(ourHealth)
+    # if (checkHealth(ourHealth)):
+    #     state = 2
+    foodToEat = findFood(board, ourX, ourY)
+    end = grid.node(foodToEat[0], foodToEat[1])
+    finder = AStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
+
+    if(state == 1):
+        print("state 1")
+        foodToEat = findFood(board, ourX, ourY)
+        print (tailPoint)
+        end = grid.node(foodToEat[0], foodToEat[1])
+        state = 2
+
+    elif(state == 2):
+        print("state 2")
+        end = grid.node(tailPoint[0], tailPoint[1])
+
+    elif(state == 3):
+        print("state 3")
+        end = grid.node(tailPoint[0], tailPoint[1])
+    
+    finder = AStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
+
+    path, runs = finder.find_path(start, end, grid)
+    print(path)
+    next_path = path[1]          
+    if (is_empty(next_path)):
+        print("Invalid Move.... Remapping")
+        end = grid.node(tailPoint[0], tailPoint[1])
+        finder = AStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
+        path, runs = finder.find_path(start, end, grid)
+
+    # print(start)
+    # print(next_path)
+    # print(next_path[0], next_path[1])
+    # print(start.x + 1)
+    print ('operations: ', runs, 'path length: ', len(path))
+    print(grid.grid_str(path=path, start=start, end=end))
+
+    if (next_path[0] == start.x + 1):
+        # print ("Right?")
+        return 3
+
+    elif (next_path[0] == start.x - 1):
+        # print ("Left")
+        return 2
+    
+    elif (next_path[1] == start.y + 1):
+        # print ("Up")
+        return 1
+
+    else:
+        # print ("Down")
+        return 0
 
