@@ -4,6 +4,8 @@ import getFood
 from pathfinding.core.diagonal_movement import DiagonalMovement
 from pathfinding.core.grid import Grid
 from pathfinding.finder.a_star import AStarFinder
+from pathfinding.finder.best_first import BestFirst
+from pathfinding.finder.bi_a_star import BiAStarFinder
 directions = ['up', 'down', 'left', 'right']
 
 def followTail(x, y):
@@ -19,7 +21,7 @@ def checkHealth(health):
 
 
 def findFood(board, x, y):
-    foodToEat = (board.food[0]['x'],board.food[0]['y'])
+    foodToEat = (board.food[1]['x'],board.food[1]['y'])
     for food in board.food:
         if((abs(food['x'] - x) + abs(food['y'] - y)) < abs((foodToEat[0] - x) + abs(foodToEat[1] - y))):
             foodToEat = (food['x'], food['y'])
@@ -97,7 +99,8 @@ def generatePath(grid, data):
     #     state = 2
     foodToEat = findFood(board, ourX, ourY)
     end = grid.node(foodToEat[0], foodToEat[1])
-    finder = AStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
+    finder = BiAStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
+    best_path = BestFirst()
 
     if(state == 1):
         print("state 1")
@@ -114,15 +117,16 @@ def generatePath(grid, data):
         print("state 3")
         end = grid.node(tailPoint[0], tailPoint[1])
     
-    finder = AStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
-
+    finder = BiAStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
+    best_path = BestFirst()
     path, runs = finder.find_path(start, end, grid)
     print(path)
     next_path = path[1]          
     if (is_empty(next_path)):
         print("Invalid Move.... Remapping")
         end = grid.node(tailPoint[0], tailPoint[1])
-        finder = AStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
+        finder =BiAStarFinder(diagonal_movement=DiagonalMovement.only_when_no_obstacle)
+        best_path = BestFirst()
         path, runs = finder.find_path(start, end, grid)
 
     # print(start)
